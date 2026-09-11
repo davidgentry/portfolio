@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity'
 
-export const aboutSection = defineType({
-  name: 'aboutSection',
-  title: 'About Section',
+export const about = defineType({
+  name: 'about',
+  title: 'About',
   type: 'object',
   fields: [
     defineField({
@@ -21,7 +21,21 @@ export const aboutSection = defineType({
       name: 'image',
       title: 'Image',
       type: 'image',
-      options: { hotspot: true },
+      options: { 
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alternative Text',
+          type: 'string',
+        },
+        {
+          name: 'imageURL',
+          title: 'Image URL',
+          type: 'url',
+        }
+      ],
     }),
     defineField({
       name: 'ctaText',

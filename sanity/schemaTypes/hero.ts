@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export const hero = defineType({
   name: 'hero',
-  title: 'Hero Section',
+  title: 'Hero',
   type: 'object',
   fields: [
     defineField({
@@ -12,10 +12,10 @@ export const hero = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'subheading',
-      title: 'Subheading',
+      name: 'description',
+      title: 'Description',
       type: 'text',
-      rows: 2,
+      rows: 3,
     }),
     defineField({
       name: 'ctaText',

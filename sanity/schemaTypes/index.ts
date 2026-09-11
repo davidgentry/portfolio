@@ -4,7 +4,7 @@ import { profile } from './profile'
 import { siteSettings } from './siteSettings'
 import { hero } from './hero'
 import { featuredProjects } from './featuredProjects'
-import { aboutSection } from './aboutSection'
+import { about } from './about'
 import { skills } from './skills'
 import { cta } from './cta'
 import { page } from './page'
@@ -16,7 +16,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   siteSettings,
   hero,
   featuredProjects,
-  aboutSection,
+  about,
   skills,
   cta
 ]

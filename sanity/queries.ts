@@ -91,3 +91,45 @@ export const pageBySlugQuery = groq`
     }
   }
 `
+
+
+// ==================== SERVICES ====================
+
+// Get all services (ordered)
+export const allServicesQuery = groq`
+  *[_type == "service"] | order(order asc, title asc) {
+    _id,
+    title,
+    slug,
+    shortDescription,
+    icon,
+    price,
+    featured
+  }
+`
+
+// Get featured services only
+export const featuredServicesQuery = groq`
+  *[_type == "service" && featured == true] | order(order asc) {
+    _id,
+    title,
+    slug,
+    shortDescription,
+    icon,
+    price
+  }
+`
+
+// Get a single service by slug (with full content)
+export const serviceBySlugQuery = groq`
+  *[_type == "service" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    shortDescription,
+    icon,
+    content,
+    price,
+    featured
+  }
+`

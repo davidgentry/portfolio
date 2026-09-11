@@ -31,7 +31,7 @@ export const page = defineType({
       of: [
         { type: 'hero' },
         { type: 'featuredProjects' },
-        { type: 'aboutSection' },
+        { type: 'about' },
         { type: 'skills' },
         { type: 'cta' },
       ],
