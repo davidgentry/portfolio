@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/lib/client'
-import { pageBySlugQuery } from '@/sanity/queries'
+import { pageBySlugQuery } from '@/lib/queries'
 import HeroHome from '@/app/components/sections/HeroHome'
 
 export default async function HomePage() {

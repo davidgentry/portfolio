@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/lib/client'
-import { allServicesQuery } from '@/sanity/queries'
+import { allServicesQuery } from '@/lib/queries'
 
 export default async function ServicesPage() {
   const services = await sanityFetch<any[]>({

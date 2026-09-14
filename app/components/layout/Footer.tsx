@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/lib/client'
-import { siteSettingsQuery } from '@/sanity/queries'
+import { siteSettingsQuery } from '@/lib/queries'
 
 export default async function Footer() {
   const siteSettings = await sanityFetch<any>({

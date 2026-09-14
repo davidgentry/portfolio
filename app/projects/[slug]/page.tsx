@@ -1,6 +1,6 @@
 import { sanityFetch } from '@/lib/client'
 import { generatePageMetadata } from '@/lib/generateMetadata'
-import { projectBySlugQuery } from '@/sanity/queries'
+import { projectBySlugQuery } from '@/lib/queries'
 import { PortableText } from '@portabletext/react'
 
 interface ProjectPageProps {

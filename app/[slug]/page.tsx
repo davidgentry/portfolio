@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/lib/client'
-import { pageBySlugQuery, siteSettingsQuery } from '@/sanity/queries'
+import { pageBySlugQuery, siteSettingsQuery } from '@/lib/queries'
 import { generatePageMetadata } from '@/lib/generateMetadata'
 import SectionRenderer from '@/app/components/SectionRenderer'
 

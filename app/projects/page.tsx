@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/lib/client'
-import { allProjectsQuery } from '@/sanity/queries'
+import { allProjectsQuery } from '@/lib/queries'
 
 export default async function ProjectsPage() {
   const projects = await sanityFetch<any[]>({

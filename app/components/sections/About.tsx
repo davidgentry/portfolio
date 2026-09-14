@@ -11,7 +11,8 @@ interface AboutProps {
 
 export default function About({ heading, content, image, ctaText, ctaLink }: AboutProps) {
 
-    const imageSrc = image ? urlFor(image).width(800).height(600).url() : ""
+  const imageSrc = image ? urlFor(image).width(800).height(600).url() : ""
+  const imageAlt = image?.alt || 'About Image'
 
   return (
     <section className="py-20 px-6">
@@ -22,20 +23,35 @@ export default function About({ heading, content, image, ctaText, ctaLink }: Abo
         {content && (
              <PortableText value={content} />
         )}
-        {image.imageUrl && (
-            <a href={image.imageUrl} target="_blank" rel="noopener noreferrer">
-                <img src={imageSrc} alt={image.alt} className="mx-auto my-8 rounded-lg shadow-lg" />
+        {image && (
+          image.imageURL ? (
+            <a 
+              href={image.imageURL} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ display: 'block' }}
+            >
+              <img 
+                src={imageSrc} 
+                alt={imageAlt} 
+                className="mx-auto my-8 rounded-lg shadow-lg" 
+              />
             </a>
-
+          ) : (
+            <div>
+              <img 
+                src={imageSrc} 
+                alt={imageAlt} 
+                className="mx-auto my-8 rounded-lg shadow-lg" 
+              />
+            </div>
+          )
         )}
-        {image && ( 
-          <img src={imageSrc} alt={image.alt} className="mx-auto my-8 rounded-lg shadow-lg" />
-        )}
-
         {ctaLink && (
           <a
             href={ctaLink}
             className="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"
+            style={{ textDecoration: 'none', display: 'inline-block' }}
           >
             {ctaText || 'Learn More'}
           </a>

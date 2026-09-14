@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/lib/client'
-import { serviceBySlugQuery } from '@/sanity/queries'
+import { serviceBySlugQuery } from '@/lib/queries'
 import { PortableText } from '@portabletext/react'
 import { generatePageMetadata } from '@/lib/generateMetadata'
 import { Metadata } from 'next'

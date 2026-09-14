@@ -8,15 +8,21 @@ import { about } from './about'
 import { skills } from './skills'
 import { cta } from './cta'
 import { page } from './page'
+import { blog } from './blog'
+import { category } from './category'
+import { tag } from './tag'
 
 export const schemaTypes: SchemaTypeDefinition[] = [
+  siteSettings,
   page,
+  blog,
   project,
   profile,
-  siteSettings,
   hero,
   featuredProjects,
   about,
   skills,
-  cta
+  cta,
+  category,
+  tag,
 ]

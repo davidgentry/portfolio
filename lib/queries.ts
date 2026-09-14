@@ -133,3 +133,110 @@ export const serviceBySlugQuery = groq`
     featured
   }
 `
+
+// Get all published blog posts (with categories & tags)
+export const allPostsQuery = `
+  *[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    "mainImage": mainImage.asset->url,
+    "categories": categories[]->{
+      _id,
+      title,
+      slug
+    },
+    "tags": tags[]->{
+      _id,
+      title,
+      slug
+    }
+  }
+`
+
+// Get a single post by slug
+export const postBySlugQuery = `
+  *[_type == "post" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    body,
+    "mainImage": mainImage.asset->url,
+    "categories": categories[]->{
+      _id,
+      title,
+      slug
+    },
+    "tags": tags[]->{
+      _id,
+      title,
+      slug
+    }
+  }
+`
+
+// Get all categories (with post count)
+export const allCategoriesQuery = `
+  *[_type == "category"] | order(title asc) {
+    _id,
+    title,
+    slug,
+    description,
+    "postCount": count(*[_type == "post" && references(^._id)])
+  }
+`
+
+// Get all tags (with post count)
+export const allTagsQuery = `
+  *[_type == "tag"] | order(title asc) {
+    _id,
+    title,
+    slug,
+    "postCount": count(*[_type == "post" && references(^._id)])
+  }
+`
+
+// Get posts by category slug
+export const postsByCategoryQuery = `
+  *[_type == "post" && $slug in categories[]->slug.current] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    "mainImage": mainImage.asset->url,
+    "categories": categories[]->{
+      title,
+      slug
+    }
+  }
+`
+
+// Get posts by tag slug
+export const postsByTagQuery = `
+  *[_type == "post" && $slug in tags[]->slug.current] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    "mainImage": mainImage.asset->url,
+    "tags": tags[]->{
+      title,
+      slug
+    }
+  }
+`
+
+// Get latest posts (useful for sidebar or homepage)
+export const latestPostsQuery = `
+  *[_type == "post"] | order(publishedAt desc)[0...5] {
+    _id,
+    title,
+    slug,
+    publishedAt
+  }
+`

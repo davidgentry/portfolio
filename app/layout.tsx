@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { sanityFetch } from '@/lib/client'
-import { siteSettingsQuery } from '@/sanity/queries'
+import { siteSettingsQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/image'
 import Header from '@/app/components/layout/Header'
 import Footer from '@/app/components/layout/Footer'
