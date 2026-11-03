@@ -1,5 +1,6 @@
 import {sanityFetch} from '@/lib/client'
 import { siteSettingsQuery } from '@/lib/queries'
+import AnimatedLogo from '@/app/components/layout/AnimatedLogo'
 
 export default async function Header() {
     const siteSettings = await sanityFetch<any>({
@@ -16,7 +17,7 @@ export default async function Header() {
                 <nav className="site-header__nav">
                     <div className="site-header__nav-inner">
                         <a href="/" className="site-header__logo">
-                        {siteSettings?.siteTitle || 'Portfolio'}
+                            <AnimatedLogo />
                         </a>
 
                         <nav className="site-header__nav">
