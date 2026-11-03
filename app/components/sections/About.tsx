@@ -15,9 +15,9 @@ export default function About({ heading, content, image, ctaText, ctaLink }: Abo
   const imageAlt = image?.alt || 'About Image'
 
   return (
-    <section className="py-20 px-6">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-5xl font-bold tracking-tight">
+    <section className="about">
+      <div className="about__inner">
+        <h1 className="about__title">
           {heading || 'Default Heading'}
         </h1>
         {content && (
@@ -30,11 +30,12 @@ export default function About({ heading, content, image, ctaText, ctaLink }: Abo
               target="_blank" 
               rel="noopener noreferrer"
               style={{ display: 'block' }}
+              className="about__image-link"
             >
               <img 
                 src={imageSrc} 
                 alt={imageAlt} 
-                className="mx-auto my-8 rounded-lg shadow-lg" 
+                className="about__image" 
               />
             </a>
           ) : (
@@ -42,7 +43,7 @@ export default function About({ heading, content, image, ctaText, ctaLink }: Abo
               <img 
                 src={imageSrc} 
                 alt={imageAlt} 
-                className="mx-auto my-8 rounded-lg shadow-lg" 
+                className="about__image" 
               />
             </div>
           )
@@ -50,7 +51,7 @@ export default function About({ heading, content, image, ctaText, ctaLink }: Abo
         {ctaLink && (
           <a
             href={ctaLink}
-            className="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"
+            className="cta-link about__cta"
             style={{ textDecoration: 'none', display: 'inline-block' }}
           >
             {ctaText || 'Learn More'}

@@ -1,12 +1,12 @@
 import { sanityFetch } from '@/lib/client'
 import { pageBySlugQuery } from '@/lib/queries'
-import HeroHome from '@/app/components/sections/HeroHome'
+import SectionRenderer from '@/app/components/SectionRenderer'
 
 export default async function HomePage() {
   const pageData = await sanityFetch<any>({
     query: pageBySlugQuery,
-    params: { slug: 'home' },
-  })
+      params: { slug: 'home' },
+    })
 
   if (!pageData) {
     return (
@@ -21,7 +21,7 @@ export default async function HomePage() {
 
   return (
     <article>
-        <HeroHome />
+      <SectionRenderer sections={pageData.sections} />
     </article>
   )
 }

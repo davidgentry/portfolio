@@ -1,10 +1,23 @@
 import type { Metadata } from 'next'
+import { Big_Shoulders, Work_Sans } from 'next/font/google'
 import './globals.css'
 import { sanityFetch } from '@/lib/client'
 import { siteSettingsQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/image'
 import Header from '@/app/components/layout/Header'
 import Footer from '@/app/components/layout/Footer'
+
+
+const bigShoulders = Big_Shoulders({
+  subsets: ['latin'],
+  weight: ['700', '900'],
+  variable: '--font-heading',
+})
+
+const workSans = Work_Sans({
+  subsets: ['latin'],
+  variable: '--font-body',
+})
 
 
 const siteSettings = await sanityFetch<any>({
@@ -40,7 +53,7 @@ export default async function RootLayout({
   
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${bigShoulders.variable} ${workSans.variable}`}>
       <body className="bg-white text-gray-900">
         
         <Header />

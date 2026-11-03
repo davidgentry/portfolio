@@ -8,22 +8,22 @@ interface CtaProps {
 
 export default function Cta({ heading, description, ctaLink, ctaText, backgroundColor }: CtaProps) {
   return (
-    <section className="py-20 px-6" style={{ backgroundColor: backgroundColor || '#f0f0f0' }}>
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-5xl font-bold tracking-tight">
-          {heading || 'Default Heading'}
+    <section className="cta" style={{ backgroundColor: backgroundColor || '#f0f0f0' }}>
+      <div className="cta__inner">
+        <h1 className="cta__title">
+          {heading || 'Call To Action'}
         </h1>
         {description && (
-          <p className="mt-4 text-xl text-gray-600">
+          <p className="cta__description">
             {description}
           </p>
         )}
         {ctaLink && (
           <a
             href={ctaLink}
-            className="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"
+            className="cta__button cta-link"
           >
-            {ctaText || 'Default Button Text'}
+            {ctaText || 'Click Here'}
           </a>
         )}
       </div>

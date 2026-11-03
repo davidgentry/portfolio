@@ -8,29 +8,33 @@ export default async function Header() {
 
     return (
 
-        <header>
-            <div className="site-logo">
-                <img src={siteSettings?.logo?.asset?.url} alt={siteSettings?.siteTitle || 'Logo'} className="h-12" />
-            </div>
-            <nav className="border-b">
-                <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <a href="/" className="font-semibold text-xl">
-                    {siteSettings?.siteTitle || 'Portfolio'}
-                    </a>
-
-                    <div className="flex gap-8 text-sm">
-                    {siteSettings?.navigation?.map((item: any, index: number) => (
-                        <a 
-                        key={index} 
-                        href={item.href} 
-                        className="hover:text-gray-600 transition-colors"
-                        >
-                        {item.label}
-                        </a>
-                    ))}
-                    </div>
+        <header className="site-header">
+            <section className="site-header__inner">
+                <div className="site-header__logo">
+                    <img src={siteSettings?.logo?.asset?.url} alt={siteSettings?.siteTitle || 'Logo'} className="h-12" />
                 </div>
-            </nav>
+                <nav className="site-header__nav">
+                    <div className="site-header__nav-inner">
+                        <a href="/" className="site-header__logo">
+                        {siteSettings?.siteTitle || 'Portfolio'}
+                        </a>
+
+                        <nav className="site-header__nav">
+                            <ul className="site-header__nav-list">
+                                {siteSettings?.navigation?.map((item: any, index: number) => (
+                                    <a 
+                                        key={index} 
+                                        href={item.href} 
+                                        className="site-header__nav-item"
+                                        >
+                                        {item.label}
+                                    </a>
+                                ))}
+                            </ul>
+                        </nav>
+                    </div>
+                </nav>
+            </section>
         </header>
     )
 }
