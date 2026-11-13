@@ -19,7 +19,6 @@ const workSans = Work_Sans({
   variable: '--font-body',
 })
 
-
 const siteSettings = await sanityFetch<any>({
     query: siteSettingsQuery,
 })

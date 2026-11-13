@@ -87,26 +87,81 @@ export default function AnimatedLogo() {
         ...entryEls,
       ].filter(Boolean) as HTMLSpanElement[]
 
-      if (accentColor) {
-        tl.to(
-          fullNameInOrder,
-          {
+      // Reusable full-name sweep, used only for the initial reveal.
+      let revealFlash: gsap.core.Timeline | null = null
+      const playRevealFlash = () => {
+        if (!accentColor) return
+        revealFlash?.kill()
+        revealFlash = gsap
+          .timeline()
+          .to(fullNameInOrder, {
             color: accentColor,
             duration: 0.25,
             stagger: 0.03,
             ease: 'power1.inOut',
-          },
-          'fadeDone+=0.1'
-        ).to(
-          fullNameInOrder,
-          {
-            color: textColor || '',
-            duration: 0.4,
-            stagger: 0.03,
-            ease: 'power1.inOut',
-          },
-          '-=0.1'
-        )
+          })
+          .to(
+            fullNameInOrder,
+            {
+              color: textColor || '',
+              duration: 0.4,
+              stagger: 0.03,
+              ease: 'power1.inOut',
+            },
+            '-=0.1'
+          )
+      }
+
+      if (accentColor) {
+        tl.add(() => playRevealFlash(), 'fadeDone+=0.1')
+      }
+
+      // Per-letter hover "splash" — hovering a letter flashes that letter
+      // and ripples outward to its neighbors (distance-based delay +
+      // falloff), rather than lighting up the whole name or following a
+      // separate cursor element. Each letter tracks/kills its own tween so
+      // rapid re-hovers don't stack or leave a letter stuck mid-color.
+      const letterTweens: (gsap.core.Timeline | null)[] = fullNameInOrder.map(
+        () => null
+      )
+
+      const handleLetterEnter = (centerIndex: number) => {
+        if (!accentColor) return
+        fullNameInOrder.forEach((el, i) => {
+          const distance = Math.abs(i - centerIndex)
+          if (distance > 3) return // splash radius — adjust to taste
+
+          letterTweens[i]?.kill()
+          const falloff = 1 - distance * 0.28 // intensity fades with distance
+          letterTweens[i] = gsap
+            .timeline()
+            .to(el, {
+              color: accentColor,
+              duration: 0.18 + distance * 0.05,
+              delay: distance * 0.045,
+              opacity: falloff,
+              ease: 'power1.out',
+            })
+            .to(el, {
+              color: textColor || '',
+              opacity: 1,
+              duration: 0.4,
+              ease: 'power1.inOut',
+            })
+        })
+      }
+
+      const cleanups: Array<() => void> = []
+      fullNameInOrder.forEach((el, i) => {
+        const handler = () => handleLetterEnter(i)
+        el.addEventListener('mouseenter', handler)
+        cleanups.push(() => el.removeEventListener('mouseenter', handler))
+      })
+
+      return () => {
+        revealFlash?.kill()
+        letterTweens.forEach((t) => t?.kill())
+        cleanups.forEach((fn) => fn())
       }
     }, container)
 
